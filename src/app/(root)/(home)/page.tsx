@@ -50,8 +50,8 @@ export default function Home() {
     <div className="container max-w-7xl mx-auto p-6">
       {/* WELCOME SECTION */}
       <div className="rounded-lg bg-card p-6 border shadow-sm mb-10">
-        <h1 className="text-4xl font-bold" style={{ color: "purple" }}>
-          Let’s get your next conversation started
+        <h1 className="text-4xl font-bold" style={{ color: "#5b21b6" }}>
+          Hello again!
         </h1>
 
         <p className="text-muted-foreground mt-2">
