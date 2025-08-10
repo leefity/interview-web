@@ -38,8 +38,8 @@ export default function Home() {
   // Quick action for candidates to join meeting
   const candidateJoinAction = {
     icon: Users,
-    title: "Join Interview", 
-    description: "Enter via invitation link",
+    title: "Join Interview",
+    description: "Enter via your meeting link",
     color: "purple-500",
     gradient: "from-purple-500/10 via-purple-500/5 to-transparent",
   };
@@ -50,13 +50,14 @@ export default function Home() {
     <div className="container max-w-7xl mx-auto p-6">
       {/* WELCOME SECTION */}
       <div className="rounded-lg bg-card p-6 border shadow-sm mb-10">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
-          Welcome back!
+        <h1 className="text-4xl font-bold" style={{ color: "purple" }}>
+          Let’s get your next conversation started
         </h1>
+
         <p className="text-muted-foreground mt-2">
           {isInterviewer
-            ? "Manage your interviews and review candidates effectively"
-            : "Access your upcoming interviews and preparations"}
+            ? "Easily host, manage, and review your interviews in one place"
+            : "Join your upcoming interviews and track your preparation progress"}
         </p>
       </div>
 
@@ -75,15 +76,17 @@ export default function Home() {
           <MeetingModal
             isOpen={showModal}
             onClose={() => setShowModal(false)}
-            title={modalType === "join" ? "Join Meeting" : "Start Meeting"}
+            title={modalType === "join" ? "Join a Meeting" : "Start a New Meeting"}
             isJoinMeeting={modalType === "join"}
           />
         </>
       ) : (
         <>
           <div>
-            <h1 className="text-3xl font-bold">Your Interviews</h1>
-            <p className="text-muted-foreground mt-1">View and join your scheduled interviews</p>
+            <h1 className="text-3xl font-bold">Your Upcoming Sessions</h1>
+            <p className="text-muted-foreground mt-1">
+              View details and join your scheduled interviews
+            </p>
           </div>
 
           {/* Add Join Meeting Option for Candidates */}
@@ -97,7 +100,7 @@ export default function Home() {
           </div>
 
           <div className="mt-8">
-            <h2 className="text-2xl font-semibold mb-4">Scheduled Interviews</h2>
+            <h2 className="text-2xl font-semibold mb-4">Scheduled Meetings</h2>
             {interviews === undefined ? (
               <div className="flex justify-center py-12">
                 <Loader2Icon className="h-8 w-8 animate-spin text-muted-foreground" />
@@ -110,7 +113,7 @@ export default function Home() {
               </div>
             ) : (
               <div className="text-center py-12 text-muted-foreground">
-                You have no scheduled interviews at the moment
+                You don’t have any meetings scheduled right now
               </div>
             )}
           </div>
@@ -119,7 +122,7 @@ export default function Home() {
           <MeetingModal
             isOpen={showModal}
             onClose={() => setShowModal(false)}
-            title="Join Meeting"
+            title="Join a Meeting"
             isJoinMeeting={true}
           />
         </>
