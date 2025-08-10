@@ -7,7 +7,6 @@ export const syncUser = mutation({
     email: v.string(),
     clerkId: v.string(),
     image: v.optional(v.string()),
-    role: v.optional(v.union(v.literal("candidate"), v.literal("interviewer"))),
   },
   handler: async (ctx, args) => {
     const existingUser = await ctx.db
@@ -19,8 +18,7 @@ export const syncUser = mutation({
 
     return await ctx.db.insert("users", {
       ...args,
-      // Use provided role or default to candidate
-      role: args.role || "candidate",
+      role: "candidate",
     });
   },
 });
