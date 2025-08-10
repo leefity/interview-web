@@ -9,7 +9,7 @@ import { api } from "../../../../convex/_generated/api";
 import { useRouter } from "next/navigation";
 import MeetingModal from "@/components/MeetingModal";
 import LoaderUI from "@/components/LoaderUI";
-import { Loader2Icon } from "lucide-react";
+import { Loader2Icon, Users } from "lucide-react";
 import MeetingCard from "@/components/MeetingCard";
 
 export default function Home() {
@@ -33,6 +33,15 @@ export default function Home() {
       default:
         router.push(`/${title.toLowerCase()}`);
     }
+  };
+
+  // Quick action for candidates to join meeting
+  const candidateJoinAction = {
+    icon: Users,
+    title: "Join Interview", 
+    description: "Enter via invitation link",
+    color: "purple-500",
+    gradient: "from-purple-500/10 via-purple-500/5 to-transparent",
   };
 
   if (isLoading) return <LoaderUI />;
@@ -77,7 +86,18 @@ export default function Home() {
             <p className="text-muted-foreground mt-1">View and join your scheduled interviews</p>
           </div>
 
+          {/* Add Join Meeting Option for Candidates */}
+          <div className="mt-6 mb-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <ActionCard
+                action={candidateJoinAction}
+                onClick={() => handleQuickAction("Join Interview")}
+              />
+            </div>
+          </div>
+
           <div className="mt-8">
+            <h2 className="text-2xl font-semibold mb-4">Scheduled Interviews</h2>
             {interviews === undefined ? (
               <div className="flex justify-center py-12">
                 <Loader2Icon className="h-8 w-8 animate-spin text-muted-foreground" />
@@ -94,6 +114,14 @@ export default function Home() {
               </div>
             )}
           </div>
+
+          {/* Meeting Modal for Candidates */}
+          <MeetingModal
+            isOpen={showModal}
+            onClose={() => setShowModal(false)}
+            title="Join Meeting"
+            isJoinMeeting={true}
+          />
         </>
       )}
     </div>
